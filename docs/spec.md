@@ -144,7 +144,8 @@ Lv.4~5 정답     +15
 ## 문항 저작
 
 - 개념 10개 (React 5 / JavaScript 5), 개념당 3문항 = **30문항**
-- Claude Code 세션에서 생성 → 사람이 검수 → `src/shared/data/questions.json` 커밋
+- Claude Code 세션에서 생성 → 사람이 검수 → `src/shared/api/questions.ts` 커밋.
+  JSON이 아니라 TS로 두면 보기 id와 `answerId`가 어긋나는 실수를 빌드가 잡아준다
 - 오답 보기는 "일부는 맞는데 결정적으로 한 군데가 틀린" 형태로 만든다. 명백히 틀린 보기는 개념 이해를 검증하지 못한다
 
 화면을 먼저 만들고, 그 위에서 샘플 3문항으로 형태를 확인한 뒤 30개를 채운다.
@@ -154,6 +155,8 @@ Lv.4~5 정답     +15
 - Next.js 16 App Router / React 19 / TypeScript / Tailwind 4 / pnpm
 - 구조: Feature-Sliced Design v2.1. Next 라우팅 폴더와 이름이 겹치므로 FSD 레이어는 `src/_app/`, `src/_pages/`로 둔다
 - 시작 레이어는 `_app` / `_pages` / `shared` 셋. `features` / `entities`는 실제로 두 곳 이상에서 쓰이는 게 생겼을 때만 만든다
+- `entities/progress`는 홈과 세션이 같은 진도 값을 읽어야 해서 열었다. 같은 레이어 슬라이스끼리는 import가 금지라 페이지에 복사해 둘 수 없다
+- 홈과 세션 화면은 진도가 localStorage에만 있으므로 `ssr: false`로 클라이언트 전용 렌더한다
 - 배포 미정. Vercel과 GitHub Pages 모두 가능하다. 나중에 세션 코치 같은 서버 기능을 붙일 생각이면 Vercel이 유리하다
 
 ## 미결정
